@@ -423,19 +423,19 @@ function Founders() {
           lines={[<>50 years making sure</>, <span className="text-brand">the right people hear you.</span>]}
         />
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-lg gap-6 sm:grid-cols-2">
           {FOUNDERS.map((p, i) => (
             <Reveal key={p.name} delay={i * 100}>
               <button
                 type="button"
                 onClick={() => setOpen(i)}
-                className="group flex h-full w-full flex-col border border-white/10 bg-ink p-6 text-left transition-colors hover:border-brand/40 sm:p-8"
+                className="group mx-auto flex h-full w-full max-w-[260px] flex-col border border-white/10 bg-ink p-5 text-left transition-colors hover:border-brand/40"
               >
                 <Plate ratio="aspect-[4/5]" src={p.img} />
-                <h3 className="mt-6 font-display text-2xl font-extrabold uppercase leading-tight">{p.name}</h3>
+                <h3 className="mt-5 font-display text-lg font-extrabold uppercase leading-tight">{p.name}</h3>
                 <span className="kicker mt-2 block text-brand">{p.role}</span>
-                <p className="mt-4 leading-relaxed text-mist">{p.teaser}</p>
-                <span className="label mt-auto inline-flex items-center gap-1.5 pt-6 text-[0.65rem] text-brand transition-all group-hover:gap-3">
+                <p className="mt-3 text-sm leading-relaxed text-mist">{p.teaser}</p>
+                <span className="label mt-auto inline-flex items-center gap-1.5 pt-5 text-[0.6rem] text-brand transition-all group-hover:gap-3">
                   Read bio <span aria-hidden>→</span>
                 </span>
               </button>
