@@ -91,7 +91,7 @@ export function Marker({ children, className = '' }) {
 /* ================================================================== */
 /*  Photo plate placeholder (swap for real B&W photography)            */
 /* ================================================================== */
-export function Plate({ label, caption, ratio = 'aspect-[4/3]', icon = 'user', src, className = '' }) {
+export function Plate({ label, caption, ratio = 'aspect-[4/3]', icon = 'user', src, pos = 'object-center', className = '' }) {
   const Glyph = Icon[icon] || Icon.user
   return (
     <figure className={`group ${className}`}>
@@ -101,7 +101,7 @@ export function Plate({ label, caption, ratio = 'aspect-[4/3]', icon = 'user', s
             src={src}
             alt={label || ''}
             loading="lazy"
-            className="h-full w-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.04]"
+            className={`h-full w-full object-cover ${pos} grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.04]`}
           />
         ) : (
           <div className="grid h-full w-full place-items-center bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent grayscale">

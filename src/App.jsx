@@ -1,13 +1,15 @@
+import { useState } from 'react'
 import {
   Reveal,
   LineReveal,
   Logo,
   Marker,
   Plate,
-  StatusBadge,
   Button,
   Icon,
 } from './components/ui.jsx'
+import adeleImg from './assets/adele.jpg'
+import chipImg from './assets/chip.jpg'
 
 /* ================================================================== */
 /*  SHARED                                                             */
@@ -25,11 +27,11 @@ const STAGE_IMGS = [
   'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=75',
   'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=75',
   'https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=75',
-  'https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=800&q=75',
+  'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=75',
 ]
 
-const ADELE_IMG = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80'
-const CHIP_IMG = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80'
+const ADELE_IMG = adeleImg
+const CHIP_IMG = chipImg
 
 const PRESS = [
   { name: 'WSJ', cls: 'font-serif text-3xl font-bold tracking-tight' },
@@ -190,11 +192,7 @@ function Pipeline() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-transparent transition-opacity duration-500 group-hover:from-ink/90" />
                 <div className="absolute inset-x-0 bottom-0 p-5">
-                  <div className="flex items-center justify-between">
-                    <StatusBadge status={c.status} />
-                    <span className="kicker">{c.score ? `Fit ${c.score}/10` : '—'}</span>
-                  </div>
-                  <h3 className="mt-3 font-display text-base font-extrabold uppercase leading-tight text-white">
+                  <h3 className="font-display text-base font-extrabold uppercase leading-tight text-white">
                     {c.name}
                   </h3>
                   <p className="kicker mt-1.5">{c.when} · {c.size}</p>
@@ -349,31 +347,67 @@ function CaseStudies() {
 }
 
 /* ================================================================== */
-/*  FOUNDERS — placed lower; photos with grayscale → colour hover      */
+/*  FOUNDERS — clickable bios + photos with grayscale → colour hover    */
 /* ================================================================== */
+const FOUNDERS = [
+  {
+    img: ADELE_IMG,
+    name: 'Adele Gambardella',
+    role: 'Co-Founder · Communications',
+    teaser: 'Seasoned PR expert, author, and counsel to leaders at the very top.',
+    bio: 'Co-Founder of The Convincing Company and accomplished author, Adele is a seasoned PR expert who has worked with three billionaires, POTUS, and the highest-paid female executive in corporate America. A regular contributor to The Wall Street Journal and Inc Magazine, she has spoken twice at the United Nations on crisis communications and compelling narratives — helping leaders master the art of persuasion across all platforms.',
+    tags: ['Wall Street Journal', 'Inc Magazine', 'United Nations'],
+  },
+  {
+    img: CHIP_IMG,
+    name: 'Chip Massey',
+    role: 'Co-Founder · Persuasion',
+    teaser: 'Former FBI Special Agent and decorated hostage negotiator.',
+    bio: 'Co-Founder of The Convincing Company and former FBI Special Agent, Chip spent years as a hostage negotiator mastering high-stakes communication, and was awarded the FBI Director’s Award for his exceptional service. Featured in Bloomberg Businessweek, Fast Company, Entrepreneur, and Investor Business Daily, one editor noted that “he can talk any executive off a ledge.” He now applies these elite negotiation and influence techniques to help clients achieve breakthrough results in business and beyond.',
+    tags: ['Bloomberg Businessweek', 'Fast Company', 'Entrepreneur'],
+  },
+]
+
+const EVENTS = [
+  ['Keynote', 'Main stage', 'https://images.unsplash.com/photo-1559223607-a43c990c692c?w=700&q=75'],
+  ['Panel', 'Industry summit', 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=700&q=75'],
+  ['Fireside', 'Leadership forum', 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&q=75'],
+  ['Press', 'Featured coverage', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=75'],
+]
+
+function BioModal({ person, onClose }) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative z-10 grid max-h-[90vh] w-full max-w-3xl grid-cols-1 overflow-hidden border border-white/15 bg-coal md:grid-cols-[2fr_3fr]">
+        <div className="hidden md:block">
+          <img src={person.img} alt={person.name} className="h-full w-full object-cover object-top grayscale" />
+        </div>
+        <div className="relative overflow-y-auto p-8 sm:p-10">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute right-5 top-5 grid h-8 w-8 place-items-center text-lg text-mist transition-colors hover:text-white"
+          >
+            ✕
+          </button>
+          <span className="label text-brand">Co-Founder</span>
+          <h3 className="mt-3 font-display text-2xl font-extrabold uppercase leading-none sm:text-3xl">{person.name}</h3>
+          <p className="mt-6 leading-relaxed text-mist">{person.bio}</p>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 pt-5">
+            {person.tags.map((t) => (
+              <span key={t} className="kicker">{t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Founders() {
-  const people = [
-    {
-      img: ADELE_IMG,
-      name: 'Adele Gambardella',
-      role: 'Co-Founder · Communications',
-      body:
-        'A career in the highest-stakes communications environments on the planet — counsel to leaders at the very top, and a two-time speaker at the United Nations on crisis communications.',
-    },
-    {
-      img: CHIP_IMG,
-      name: 'Chip Massey',
-      role: 'Co-Founder · Persuasion',
-      body:
-        'Former FBI Special Agent, decorated hostage negotiator, and recipient of the FBI Director’s Award. An expert in making sure the right people hear the right message at exactly the right moment.',
-    },
-  ]
-  const events = [
-    ['Keynote', 'Main stage', 'https://images.unsplash.com/photo-1559223607-a43c990c692c?w=700&q=75'],
-    ['Panel', 'Industry summit', 'https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=700&q=75'],
-    ['Fireside', 'Leadership forum', 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&q=75'],
-    ['Press', 'Featured coverage', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=75'],
-  ]
+  const [open, setOpen] = useState(null)
   return (
     <section id="founders" className="border-t border-white/10 bg-coal px-6 py-24 sm:px-10 sm:py-28">
       <div className="mx-auto max-w-content">
@@ -386,12 +420,25 @@ function Founders() {
         />
 
         <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {people.map((p, i) => (
+          {FOUNDERS.map((p, i) => (
             <Reveal key={p.name} delay={i * 100}>
-              <div className="flex h-full flex-col border border-white/10 bg-ink p-6 sm:p-8">
-                <Plate ratio="aspect-[5/4]" src={p.img} label={p.name} caption={p.role} />
-                <p className="mt-6 leading-relaxed text-mist">{p.body}</p>
-              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(i)}
+                className="group flex h-full w-full flex-col border border-white/10 bg-ink p-6 text-left transition-colors hover:border-brand/40 sm:p-8"
+              >
+                <Plate ratio="aspect-[4/5]" src={p.img} pos="object-top" />
+                <div className="mt-6 flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-display text-2xl font-extrabold uppercase leading-tight">{p.name}</h3>
+                    <span className="kicker mt-2 block text-brand">{p.role}</span>
+                  </div>
+                  <span className="label shrink-0 pt-1 text-[0.6rem] text-mist transition-colors group-hover:text-brand">
+                    Read bio →
+                  </span>
+                </div>
+                <p className="mt-4 leading-relaxed text-mist">{p.teaser}</p>
+              </button>
             </Reveal>
           ))}
         </div>
@@ -408,7 +455,7 @@ function Founders() {
             <span className="label text-brand">On the stages that matter</span>
           </Reveal>
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {events.map(([label, caption, img], i) => (
+            {EVENTS.map(([label, caption, img], i) => (
               <Reveal key={label} delay={i * 70}>
                 <Plate ratio="aspect-[4/5]" src={img} label={label} caption={caption} />
               </Reveal>
@@ -416,6 +463,8 @@ function Founders() {
           </div>
         </div>
       </div>
+
+      {open !== null && <BioModal person={FOUNDERS[open]} onClose={() => setOpen(null)} />}
     </section>
   )
 }
@@ -462,11 +511,7 @@ function Footer() {
       <div className="mx-auto max-w-content text-center">
         <Logo className="mx-auto text-2xl" />
         <p className="mx-auto mt-8 max-w-xl leading-relaxed text-mist">
-          Want the receipts? Explore the full library of client wins —{' '}
-          <a href={CASE_STUDIES_URL} target="_blank" rel="noreferrer" className="text-brand underline-offset-4 hover:underline">
-            see more case studies on convincingcompany.com
-          </a>
-          .
+          Click below to see more of our case studies.
         </p>
         <a
           href={CASE_STUDIES_URL}
