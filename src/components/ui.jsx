@@ -67,7 +67,7 @@ export function Logo({ tagline = false, className = '' }) {
       <span className="text-white">Company</span>
       {tagline && (
         <span className="mt-2 font-sans text-[0.4em] font-medium tracking-[0.45em] text-mist">
-          Investor Relations
+          Panel Placement
         </span>
       )}
     </span>
