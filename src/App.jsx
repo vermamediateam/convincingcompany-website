@@ -64,97 +64,65 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/92 to-ink/55" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-ink/40" />
 
-      <div className="relative z-10 mx-auto w-full max-w-content">
-        <div className="grid items-start gap-16 lg:grid-cols-12">
-
-          {/* ── Left column ── */}
-          <div className="lg:col-span-7">
-            <Reveal>
-              <div className="flex items-center gap-4">
-                <span className="h-px w-12 bg-brand/60" />
-                <span className="label text-brand">For Founders &amp; Executives</span>
-              </div>
-            </Reveal>
-
-            <LineReveal
-              className="display mt-10 text-[clamp(3rem,10vw,9.5rem)]"
-              lines={[
-                <>You've earned the credibility.</>,
-                <span className="text-brand">The market just hasn't heard it.</span>,
-              ]}
-            />
-
-            {/* Video placeholder */}
-            <Reveal delay={100}>
-              <div className="mt-12 max-w-2xl">
-                <div className="group relative aspect-video w-full cursor-pointer overflow-hidden border border-white/15 bg-panel/60 backdrop-blur-sm transition-colors hover:border-brand/50">
-                  <div className="absolute inset-0 grid place-items-center">
-                    <span className="grid h-16 w-16 place-items-center rounded-full bg-brand text-black transition-transform duration-300 group-hover:scale-110">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-6 w-6">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </span>
-                  </div>
-                  <span className="absolute left-4 top-4 kicker text-white/40">[ video ]</span>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={120}>
-              <p className="mt-10 max-w-xl text-lg leading-relaxed text-mist sm:text-xl">
-                The panels, the stages, the press are going to people no better than you —{' '}
-                <span className="text-white">just more visible.</span> We put you in those rooms
-                instead.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Button href="#begin">
-                  Book a strategy call <Icon.arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <Button href="#founders" variant="outline">
-                  Meet Adele &amp; Chip
-                </Button>
-              </div>
-
-              {/* Press / publications */}
-              <div className="mt-14">
-                <p className="kicker mb-6">As Featured In</p>
-                <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-white/75">
-                  {PRESS.map((p) => (
-                    <span key={p.name} className={`${p.cls} transition-colors hover:text-white`}>
-                      {p.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+      <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
+        <Reveal>
+          <div className="flex items-center justify-center gap-4">
+            <span className="h-px w-10 bg-brand/60" />
+            <span className="label text-brand">For Founders &amp; Executives</span>
+            <span className="h-px w-10 bg-brand/60" />
           </div>
+        </Reveal>
 
-          {/* ── Right column — proof card ── */}
-          <Reveal className="lg:col-span-5 lg:mt-12" delay={200}>
-            <div className="border border-white/10 bg-ink/70 p-8 backdrop-blur-md">
-              <p className="label text-brand mb-7">Why It Compounds</p>
-              <dl className="grid grid-cols-1 gap-px bg-white/10">
-                {[
-                  ['30–90d', 'To your first placement'],
-                  ['50+ yrs', 'In the highest-stakes rooms'],
-                  ['100%', 'Done-for-you'],
-                ].map(([big, label]) => (
-                  <div key={label} className="bg-panel px-5 py-7">
-                    <dt className="font-display text-4xl font-extrabold text-white">{big}</dt>
-                    <dd className="kicker mt-3 leading-snug">{label}</dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <p className="kicker">
-                  Latest ·{' '}
-                  <span className="text-accept">DC Bar — a major issue, turned into a whisper</span>
-                </p>
+        <LineReveal
+          className="display mx-auto mt-8 max-w-4xl text-[clamp(2rem,5.2vw,4.25rem)]"
+          lines={[
+            <>You've earned the credibility.</>,
+            <span className="text-brand">The market just hasn't heard it.</span>,
+          ]}
+        />
+
+        <Reveal delay={120}>
+          <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-mist sm:text-lg">
+            The panels, the stages, the press are going to people no better than you —{' '}
+            <span className="text-white">just more visible.</span> We put you in those rooms instead.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Button href="#begin">
+              Book a strategy call <Icon.arrow className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button href="#founders" variant="outline">
+              Meet Adele &amp; Chip
+            </Button>
+          </div>
+        </Reveal>
+
+        {/* Video placeholder */}
+        <Reveal delay={160}>
+          <div className="mx-auto mt-12 aspect-video w-full max-w-3xl">
+            <div className="group relative h-full w-full cursor-pointer overflow-hidden border border-white/15 bg-panel/60 backdrop-blur-sm transition-colors hover:border-brand/50">
+              <div className="absolute inset-0 grid place-items-center">
+                <span className="grid h-16 w-16 place-items-center rounded-full bg-brand text-black transition-transform duration-300 group-hover:scale-110">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-6 w-6">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
               </div>
+              <span className="absolute left-4 top-4 kicker text-white/40">[ video ]</span>
             </div>
-          </Reveal>
+          </div>
+        </Reveal>
 
-        </div>
+        {/* Press / publications */}
+        <Reveal delay={200}>
+          <p className="kicker mb-6 mt-14">As Featured In</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-white/70">
+            {PRESS.map((p) => (
+              <span key={p.name} className={`${p.cls} transition-colors hover:text-white`}>
+                {p.name}
+              </span>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   )
@@ -196,44 +164,41 @@ function Founders() {
         <div className="mt-14 grid gap-10 md:grid-cols-2">
           {people.map((p, i) => (
             <Reveal key={p.initials} delay={i * 100}>
-              <div className="flex h-full flex-col border border-white/10 bg-panel p-8 sm:p-10">
-                <div className="flex items-center gap-5">
-                  <span className="grid h-16 w-16 flex-shrink-0 place-items-center rounded-full border border-brand/50 font-display text-lg font-bold text-brand">
-                    {p.initials}
-                  </span>
-                  <div>
-                    <h3 className="font-display text-2xl font-extrabold uppercase leading-tight">{p.name}</h3>
-                    <span className="kicker mt-2 block text-brand">{p.role}</span>
-                  </div>
-                </div>
-                <p className="mt-7 leading-relaxed text-mist">{p.body}</p>
+              <div className="flex h-full flex-col border border-white/10 bg-panel p-6 sm:p-8">
+                <Plate ratio="aspect-[5/4]" icon="user" label="Photograph" caption="To come" />
+                <h3 className="mt-6 font-display text-2xl font-extrabold uppercase leading-tight">{p.name}</h3>
+                <span className="kicker mt-2 block text-brand">{p.role}</span>
+                <p className="mt-5 leading-relaxed text-mist">{p.body}</p>
               </div>
             </Reveal>
           ))}
         </div>
 
         <Reveal delay={120}>
-          <p className="display mt-12 max-w-4xl text-[clamp(1.3rem,2.8vw,2.1rem)] text-mist">
+          <p className="display mx-auto mt-14 max-w-3xl text-center text-[clamp(1.2rem,2.4vw,1.9rem)] text-mist">
             Together they founded The Convincing Company — over 50 years making sure the right people
             hear the right message at exactly the <span className="text-white">right moment.</span>
           </p>
         </Reveal>
 
-        {/* Proof strip */}
-        <Reveal delay={180}>
-          <div className="mt-10 flex flex-wrap items-center gap-x-12 gap-y-6 border-t border-white/10 pt-8">
+        {/* Event photos */}
+        <div className="mt-16">
+          <Reveal>
+            <span className="label text-brand">On the stages that matter</span>
+          </Reveal>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              ['Lockheed Martin → Meta', 'Trusted across industries'],
-              ['United Nations', 'Crisis communications · ×2'],
-              ['POTUS · 3 billionaires', 'Counsel at the top'],
-            ].map(([big, label]) => (
-              <div key={label}>
-                <div className="font-display text-xl font-extrabold text-white">{big}</div>
-                <div className="kicker mt-2">{label}</div>
-              </div>
+              ['Keynote', 'Main stage'],
+              ['Panel', 'Industry summit'],
+              ['Fireside', 'Leadership forum'],
+              ['Press', 'Featured coverage'],
+            ].map(([label, caption], i) => (
+              <Reveal key={label} delay={i * 70}>
+                <Plate ratio="aspect-[4/5]" icon="mic" label={label} caption={caption} />
+              </Reveal>
             ))}
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   )
