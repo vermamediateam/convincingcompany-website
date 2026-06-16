@@ -385,7 +385,7 @@ function BioModal({ person, onClose }) {
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
       <div className="relative z-10 grid max-h-[90vh] w-full max-w-3xl grid-cols-1 overflow-hidden border border-white/15 bg-coal md:grid-cols-[2fr_3fr]">
         <div className="hidden md:block">
-          <img src={person.img} alt={person.name} className="h-full w-full object-cover object-top grayscale" />
+          <img src={person.img} alt={person.name} className="h-full w-full object-cover object-center grayscale" />
         </div>
         <div className="relative overflow-y-auto p-8 sm:p-10">
           <button
