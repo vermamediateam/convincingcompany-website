@@ -34,10 +34,10 @@ const ADELE_IMG = adeleImg
 const CHIP_IMG = chipImg
 
 const PRESS = [
-  { name: 'WSJ', cls: 'font-serif text-3xl font-bold tracking-tight' },
-  { name: 'Inc.', cls: 'font-display text-3xl font-black tracking-tight' },
-  { name: 'Fast Company', cls: 'font-display text-xl font-extrabold uppercase tracking-tight' },
-  { name: 'CBS', cls: 'font-display text-3xl font-black tracking-tight' },
+  { name: 'WSJ', cls: 'font-serif text-2xl font-bold tracking-tight sm:text-3xl' },
+  { name: 'Inc.', cls: 'font-display text-2xl font-black tracking-tight sm:text-3xl' },
+  { name: 'Fast Company', cls: 'font-display text-base font-extrabold uppercase tracking-tight sm:text-xl' },
+  { name: 'CBS', cls: 'font-display text-2xl font-black tracking-tight sm:text-3xl' },
 ]
 
 /* ================================================================== */
@@ -47,9 +47,9 @@ function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-ink/85 backdrop-blur-md">
       <div className="mx-auto max-w-content px-6 sm:px-10">
-        <nav className="flex items-center justify-between py-4">
-          <a href="#top" aria-label="The Convincing Company">
-            <Logo className="text-base leading-none sm:text-lg" />
+        <nav className="flex items-center justify-between gap-3 py-4">
+          <a href="#top" aria-label="The Convincing Company" className="min-w-0">
+            <Logo className="text-sm leading-none sm:text-lg" />
           </a>
           <div className="hidden items-center gap-2 lg:flex">
             <span className="kicker">Panel Placement</span>
@@ -58,7 +58,7 @@ function Nav() {
           </div>
           <a
             href={BOOK}
-            className="inline-flex items-center gap-2 bg-brand px-5 py-2.5 label text-[0.65rem] text-white transition-colors hover:bg-brandBright"
+            className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap bg-brand px-4 py-2 label text-[0.6rem] text-white transition-colors hover:bg-brandBright sm:px-5 sm:py-2.5 sm:text-[0.65rem]"
           >
             Book a Call →
           </a>
@@ -133,7 +133,7 @@ function Hero() {
           </div>
 
           <p className="kicker mb-6 mt-14">As Featured In</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-white/70">
+          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-5 text-white/70 sm:gap-x-12">
             {PRESS.map((p) => (
               <span key={p.name} className={`${p.cls} transition-colors hover:text-white`}>
                 {p.name}
@@ -457,7 +457,7 @@ function Founders() {
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {EVENTS.map(([label, caption], i) => (
               <Reveal key={label} delay={i * 70}>
-                <Plate ratio="aspect-[4/5]" icon="mic" label={label} caption={caption} />
+                <Plate ratio="aspect-[4/5]" icon="image" label={label} caption={caption} />
               </Reveal>
             ))}
           </div>

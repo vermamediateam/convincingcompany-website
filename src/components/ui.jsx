@@ -104,9 +104,8 @@ export function Plate({ label, caption, ratio = 'aspect-[4/3]', icon = 'user', s
             className={`h-full w-full object-cover ${pos} grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.04]`}
           />
         ) : (
-          <div className="grid h-full w-full place-items-center bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent grayscale">
-            <Glyph className="h-1/4 w-1/4 text-white/10" />
-            <span className="absolute left-3 top-3 kicker text-white/30">[ photo ]</span>
+          <div className="grid h-full w-full place-items-center bg-white/[0.05]">
+            <Glyph className="h-9 w-9 text-white/15" />
           </div>
         )}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.55))]" />
@@ -203,4 +202,5 @@ export const Icon = {
   layers: (p) => (<I {...p}><path d="m12 3 9 5-9 5-9-5 9-5z" /><path d="m3 13 9 5 9-5" /></I>),
   compass: (p) => (<I {...p}><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5 5-2z" /></I>),
   spark: (p) => (<I {...p}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.4 2.4M16 16l2.4 2.4M18.4 5.6 16 8M8 16l-2.4 2.4" /></I>),
+  image: (p) => (<I {...p}><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="m21 15-4.5-4.5L5 21" /></I>),
 }
