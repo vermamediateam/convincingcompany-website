@@ -62,9 +62,11 @@ export function LineReveal({ lines, className = '', stagger = 90 }) {
 /* ================================================================== */
 export function Logo({ tagline = false, className = '' }) {
   return (
-    <span className={`inline-flex flex-col font-display font-extrabold uppercase leading-[0.82] tracking-[-0.01em] ${className}`}>
-      <span className="text-brand">Convincing</span>
-      <span className="text-white">Company</span>
+    <span className={`inline-flex flex-col font-display font-extrabold uppercase tracking-[-0.01em] ${className}`}>
+      <span className="flex items-baseline gap-1.5 whitespace-nowrap leading-none">
+        <span className="text-brand">Convincing</span>
+        <span className="text-white">Company</span>
+      </span>
       {tagline && (
         <span className="mt-2 font-sans text-[0.4em] font-medium tracking-[0.45em] text-mist">
           Panel Placement
@@ -77,10 +79,9 @@ export function Logo({ tagline = false, className = '' }) {
 /* ================================================================== */
 /*  Section marker — "§ 03 ——— PANEL ARCHITECTURE"                     */
 /* ================================================================== */
-export function Marker({ n, children, className = '' }) {
+export function Marker({ children, className = '' }) {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
-      <span className="label text-brand">§{n}</span>
       <span className="h-px w-12 bg-brand/60" />
       <span className="label text-brand/90">{children}</span>
     </div>
@@ -90,16 +91,25 @@ export function Marker({ n, children, className = '' }) {
 /* ================================================================== */
 /*  Photo plate placeholder (swap for real B&W photography)            */
 /* ================================================================== */
-export function Plate({ label, caption, ratio = 'aspect-[4/3]', icon = 'user', className = '' }) {
+export function Plate({ label, caption, ratio = 'aspect-[4/3]', icon = 'user', src, className = '' }) {
   const Glyph = Icon[icon] || Icon.user
   return (
-    <figure className={className}>
-      <div
-        className={`relative grid place-items-center overflow-hidden border border-white/10 bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent grayscale ${ratio}`}
-      >
-        <Glyph className="h-1/4 w-1/4 text-white/10" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6))]" />
-        <span className="absolute left-3 top-3 kicker text-white/30">[ photo ]</span>
+    <figure className={`group ${className}`}>
+      <div className={`relative overflow-hidden border border-white/10 ${ratio}`}>
+        {src ? (
+          <img
+            src={src}
+            alt={label || ''}
+            loading="lazy"
+            className="h-full w-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div className="grid h-full w-full place-items-center bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent grayscale">
+            <Glyph className="h-1/4 w-1/4 text-white/10" />
+            <span className="absolute left-3 top-3 kicker text-white/30">[ photo ]</span>
+          </div>
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.55))]" />
       </div>
       {(label || caption) && (
         <figcaption className="mt-3 flex items-center justify-between">
