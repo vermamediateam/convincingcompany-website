@@ -38,8 +38,15 @@ function Nav() {
 }
 
 /* ================================================================== */
-/*  HERO — THE PROBLEM 01                                               */
+/*  HERO — FOR FOUNDERS & EXECUTIVES                                    */
 /* ================================================================== */
+const PRESS = [
+  { name: 'WSJ', cls: 'font-serif text-3xl font-bold tracking-tight' },
+  { name: 'Inc.', cls: 'font-display text-3xl font-black tracking-tight' },
+  { name: 'Fast Company', cls: 'font-display text-xl font-extrabold uppercase tracking-tight' },
+  { name: 'CBS', cls: 'font-display text-3xl font-black tracking-tight' },
+]
+
 function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden px-6 pt-32 pb-20 sm:px-10">
@@ -58,28 +65,46 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-ink/40" />
 
       <div className="relative z-10 mx-auto w-full max-w-content">
-        <div className="grid items-center gap-16 lg:grid-cols-12">
+        <div className="grid items-start gap-16 lg:grid-cols-12">
 
           {/* ── Left column ── */}
           <div className="lg:col-span-7">
             <Reveal>
-              <Marker n="01 — For Founders &amp; Executives">The Problem</Marker>
+              <div className="flex items-center gap-4">
+                <span className="h-px w-12 bg-brand/60" />
+                <span className="label text-brand">For Founders &amp; Executives</span>
+              </div>
             </Reveal>
 
             <LineReveal
-              className="display mt-10 text-[clamp(2.6rem,9vw,8.5rem)]"
+              className="display mt-10 text-[clamp(3rem,10vw,9.5rem)]"
               lines={[
                 <>You've earned the credibility.</>,
                 <span className="text-brand">The market just hasn't heard it.</span>,
               ]}
             />
 
+            {/* Video placeholder */}
+            <Reveal delay={100}>
+              <div className="mt-12 max-w-2xl">
+                <div className="group relative aspect-video w-full cursor-pointer overflow-hidden border border-white/15 bg-panel/60 backdrop-blur-sm transition-colors hover:border-brand/50">
+                  <div className="absolute inset-0 grid place-items-center">
+                    <span className="grid h-16 w-16 place-items-center rounded-full bg-brand text-black transition-transform duration-300 group-hover:scale-110">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-6 w-6">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </div>
+                  <span className="absolute left-4 top-4 kicker text-white/40">[ video ]</span>
+                </div>
+              </div>
+            </Reveal>
+
             <Reveal delay={120}>
-              <p className="mt-12 max-w-2xl text-lg leading-relaxed text-mist sm:text-xl">
-                You're doing real work and getting real results. But the panels, the stages, the
-                press? They're going to someone who isn't better than you —{' '}
-                <span className="text-white">just more visible.</span> Every month you're not in
-                those rooms, a competitor is. We don't wait to get noticed. We go get it.
+              <p className="mt-10 max-w-xl text-lg leading-relaxed text-mist sm:text-xl">
+                The panels, the stages, the press are going to people no better than you —{' '}
+                <span className="text-white">just more visible.</span> We put you in those rooms
+                instead.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Button href="#begin">
@@ -89,11 +114,23 @@ function Hero() {
                   Meet Adele &amp; Chip
                 </Button>
               </div>
+
+              {/* Press / publications */}
+              <div className="mt-14">
+                <p className="kicker mb-6">As Featured In</p>
+                <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-white/75">
+                  {PRESS.map((p) => (
+                    <span key={p.name} className={`${p.cls} transition-colors hover:text-white`}>
+                      {p.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </Reveal>
           </div>
 
           {/* ── Right column — proof card ── */}
-          <Reveal className="lg:col-span-5" delay={200}>
+          <Reveal className="lg:col-span-5 lg:mt-12" delay={200}>
             <div className="border border-white/10 bg-ink/70 p-8 backdrop-blur-md">
               <p className="label text-brand mb-7">Why It Compounds</p>
               <dl className="grid grid-cols-1 gap-px bg-white/10">
