@@ -233,14 +233,16 @@ function PanelArchitecture() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-3">
-          {deliverables.map(([title, body]) => (
-            <div key={title} className="bg-ink p-8">
-              <h3 className="font-display text-lg font-extrabold uppercase leading-snug">{title}</h3>
-              <p className="mt-3 leading-relaxed text-mist">{body}</p>
-            </div>
-          ))}
-        </div>
+        <Reveal delay={120}>
+          <div className="mt-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-3">
+            {deliverables.map(([title, body]) => (
+              <div key={title} className="bg-ink p-8">
+                <h3 className="font-display text-lg font-extrabold uppercase leading-snug">{title}</h3>
+                <p className="mt-3 leading-relaxed text-mist">{body}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   )
@@ -266,7 +268,8 @@ function Trajectory() {
           className="display mt-8 text-[clamp(1.8rem,4vw,3.25rem)]"
           lines={[<>Four moves. <span className="text-brand">You just show up.</span></>]}
         />
-        <div className="mt-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+        <Reveal delay={120}>
+          <div className="mt-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((s) => {
             const Glyph = Icon[s.icon]
             return (
@@ -282,7 +285,8 @@ function Trajectory() {
               </div>
             )
           })}
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
@@ -427,17 +431,13 @@ function Founders() {
                 onClick={() => setOpen(i)}
                 className="group flex h-full w-full flex-col border border-white/10 bg-ink p-6 text-left transition-colors hover:border-brand/40 sm:p-8"
               >
-                <Plate ratio="aspect-[4/5]" src={p.img} pos="object-top" />
-                <div className="mt-6 flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-display text-2xl font-extrabold uppercase leading-tight">{p.name}</h3>
-                    <span className="kicker mt-2 block text-brand">{p.role}</span>
-                  </div>
-                  <span className="label shrink-0 pt-1 text-[0.6rem] text-mist transition-colors group-hover:text-brand">
-                    Read bio →
-                  </span>
-                </div>
+                <Plate ratio="aspect-[4/5]" src={p.img} />
+                <h3 className="mt-6 font-display text-2xl font-extrabold uppercase leading-tight">{p.name}</h3>
+                <span className="kicker mt-2 block text-brand">{p.role}</span>
                 <p className="mt-4 leading-relaxed text-mist">{p.teaser}</p>
+                <span className="label mt-auto inline-flex items-center gap-1.5 pt-6 text-[0.65rem] text-brand transition-all group-hover:gap-3">
+                  Read bio <span aria-hidden>→</span>
+                </span>
               </button>
             </Reveal>
           ))}
@@ -455,9 +455,9 @@ function Founders() {
             <span className="label text-brand">On the stages that matter</span>
           </Reveal>
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {EVENTS.map(([label, caption, img], i) => (
+            {EVENTS.map(([label, caption], i) => (
               <Reveal key={label} delay={i * 70}>
-                <Plate ratio="aspect-[4/5]" src={img} label={label} caption={caption} />
+                <Plate ratio="aspect-[4/5]" icon="mic" label={label} caption={caption} />
               </Reveal>
             ))}
           </div>
@@ -489,14 +489,16 @@ function FAQ() {
           className="display mt-8 text-[clamp(1.8rem,4vw,3.25rem)]"
           lines={[<>The questions <span className="text-brand">we get most.</span></>]}
         />
-        <div className="mt-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2">
-          {qs.map(([q, a]) => (
-            <div key={q} className="bg-ink p-8 sm:p-10">
-              <h3 className="font-display text-base font-extrabold uppercase leading-snug text-white">{q}</h3>
-              <p className="mt-4 leading-relaxed text-mist">{a}</p>
-            </div>
-          ))}
-        </div>
+        <Reveal delay={120}>
+          <div className="mt-12 grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2">
+            {qs.map(([q, a]) => (
+              <div key={q} className="bg-ink p-8 sm:p-10">
+                <h3 className="font-display text-base font-extrabold uppercase leading-snug text-white">{q}</h3>
+                <p className="mt-4 leading-relaxed text-mist">{a}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   )
