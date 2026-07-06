@@ -10,6 +10,7 @@ import {
 } from './components/ui.jsx'
 import adeleImg from './assets/adele.jpg'
 import chipImg from './assets/chip.jpg'
+import heroVideo from './assets/hero.mp4'
 
 /* ================================================================== */
 /*  SHARED                                                             */
@@ -34,10 +35,13 @@ const ADELE_IMG = adeleImg
 const CHIP_IMG = chipImg
 
 const PRESS = [
-  { name: 'WSJ', cls: 'font-serif text-2xl font-bold tracking-tight sm:text-3xl' },
-  { name: 'Inc.', cls: 'font-display text-2xl font-black tracking-tight sm:text-3xl' },
-  { name: 'Fast Company', cls: 'font-display text-base font-extrabold uppercase tracking-tight sm:text-xl' },
-  { name: 'CBS', cls: 'font-display text-2xl font-black tracking-tight sm:text-3xl' },
+  { name: 'WSJ', cls: 'font-serif text-2xl font-bold tracking-tight' },
+  { name: 'Inc.', cls: 'font-display text-2xl font-black tracking-tight' },
+  { name: 'Fast Company', cls: 'font-display text-base font-extrabold uppercase tracking-tight' },
+  { name: 'CBS', cls: 'font-display text-2xl font-black tracking-tight' },
+  { name: 'Bloomberg', cls: 'font-display text-xl font-extrabold uppercase tracking-tight' },
+  { name: 'Entrepreneur', cls: 'font-display text-base font-extrabold uppercase tracking-tight' },
+  { name: 'Investor\'s Business Daily', cls: 'font-display text-xs font-extrabold uppercase tracking-[0.12em]' },
 ]
 
 /* ================================================================== */
@@ -108,17 +112,13 @@ function Hero() {
 
         {/* Video — directly below the blurb */}
         <Reveal delay={160}>
-          <div className="mx-auto mt-10 aspect-video w-full max-w-3xl">
-            <div className="group relative h-full w-full cursor-pointer overflow-hidden border border-white/15 bg-panel/60 backdrop-blur-sm transition-colors hover:border-brand/50">
-              <div className="absolute inset-0 grid place-items-center">
-                <span className="grid h-16 w-16 place-items-center rounded-full bg-brand text-white transition-transform duration-300 group-hover:scale-110">
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-6 w-6">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
-              </div>
-              <span className="absolute left-4 top-4 kicker text-white/40">[ video ]</span>
-            </div>
+          <div className="mx-auto mt-10 aspect-video w-full max-w-3xl overflow-hidden border border-white/15">
+            <video
+              className="h-full w-full object-cover"
+              controls
+              preload="metadata"
+              src={heroVideo}
+            />
           </div>
         </Reveal>
 
@@ -133,12 +133,15 @@ function Hero() {
           </div>
 
           <p className="kicker mb-6 mt-14">As Featured In</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-5 text-white/70 sm:gap-x-12">
-            {PRESS.map((p) => (
-              <span key={p.name} className={`${p.cls} transition-colors hover:text-white`}>
-                {p.name}
-              </span>
-            ))}
+          <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+            <div
+              className="flex w-max gap-x-14 text-white/60"
+              style={{ animation: 'marquee 22s linear infinite' }}
+            >
+              {[...PRESS, ...PRESS].map((p, i) => (
+                <span key={i} className={p.cls}>{p.name}</span>
+              ))}
+            </div>
           </div>
         </Reveal>
       </div>
@@ -297,19 +300,22 @@ function Trajectory() {
 /* ================================================================== */
 const CASES = [
   {
-    img: 'https://convincingcompany.com/wp-content/uploads/2025/03/ACA.jpg',
-    title: 'American Counseling Association',
-    body: 'Positioned at the head of the conversations that shape their profession — on the panels where membership and partnership decisions get made.',
+    vimeoId: '515481140',
+    title: 'Lockheed Martin',
+    label: 'Fortune 500 · Defense & Aerospace',
+    body: 'Placed their leadership on the panels where defense and aerospace decision-makers sit — the credibility that drives partnerships, not press releases.',
   },
   {
-    img: 'https://convincingcompany.com/wp-content/uploads/2025/03/APA_.jpg',
-    title: 'American Planning Association',
-    body: 'From largely internal influence to recognized external authority — visibility that drove organizational growth.',
+    vimeoId: '515482946',
+    title: 'ASAE',
+    label: 'Association of Association Executives',
+    body: 'Got in front of the CEOs who control professional and industry conference lineups across thousands of associations. One relationship, hundreds of stages.',
   },
   {
-    img: 'https://convincingcompany.com/wp-content/uploads/2025/03/APMP.jpg',
-    title: 'APMP',
-    body: 'A high-stakes moment, managed so precisely that what could have been a lasting narrative never took hold.',
+    img: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=75',
+    title: 'Tech Founder — $100M Exit',
+    label: 'Enterprise Technology',
+    body: 'After a nine-figure exit, turned a track record into a speaking presence — board rooms, investor stages, and the rooms that shape the next chapter.',
   },
 ]
 
@@ -336,8 +342,22 @@ function CaseStudies() {
           {CASES.map((c, i) => (
             <Reveal key={c.title} delay={i * 90}>
               <article className="flex h-full flex-col border border-white/10 bg-ink">
-                <Plate ratio="aspect-[16/10]" src={c.img} label="" caption="" className="[&_figcaption]:hidden" />
+                {c.vimeoId ? (
+                  <div className="aspect-video w-full overflow-hidden">
+                    <iframe
+                      src={`https://player.vimeo.com/video/${c.vimeoId}`}
+                      className="h-full w-full"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      title={c.title}
+                    />
+                  </div>
+                ) : (
+                  <Plate ratio="aspect-[16/10]" src={c.img} label="" caption="" className="[&_figcaption]:hidden" />
+                )}
                 <div className="flex flex-1 flex-col p-7">
+                  {c.label && <span className="kicker mb-2 text-brand">{c.label}</span>}
                   <h3 className="font-display text-lg font-extrabold uppercase leading-snug">{c.title}</h3>
                   <p className="mt-3 leading-relaxed text-mist">{c.body}</p>
                 </div>
@@ -470,6 +490,48 @@ function Founders() {
 }
 
 /* ================================================================== */
+/*  SOCIAL PROOF — Chip testimonial videos                             */
+/* ================================================================== */
+const CHIP_PROOFS = [
+  { vimeoId: '1203891346' },
+  { vimeoId: '1203801461' },
+]
+
+function SocialProof() {
+  return (
+    <section id="social-proof" className="border-t border-white/10 bg-panel px-6 py-24 sm:px-10 sm:py-28">
+      <div className="mx-auto max-w-content">
+        <Reveal>
+          <Marker>What Clients Say</Marker>
+        </Reveal>
+        <LineReveal
+          className="display mt-8 text-[clamp(1.8rem,4vw,3.25rem)]"
+          lines={[<>Hear it from the</>, <span className="text-brand">people in the room.</span>]}
+        />
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {CHIP_PROOFS.map((p, i) => (
+            <Reveal key={p.vimeoId} delay={i * 90}>
+              <div className="border border-white/10 bg-ink overflow-hidden">
+                <div className="aspect-video w-full">
+                  <iframe
+                    src={`https://player.vimeo.com/video/${p.vimeoId}`}
+                    className="h-full w-full"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    title={`Client testimonial ${i + 1}`}
+                  />
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ================================================================== */
 /*  FAQ                                                                 */
 /* ================================================================== */
 function FAQ() {
@@ -546,6 +608,7 @@ export default function App() {
         <Trajectory />
         <CaseStudies />
         <Founders />
+        <SocialProof />
         <FAQ />
       </main>
       <Footer />
