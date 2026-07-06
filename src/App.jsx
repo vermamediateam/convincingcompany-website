@@ -386,11 +386,11 @@ const FOUNDERS = [
   },
   {
     img: CHIP_IMG,
-    name: 'Chip Massey',
-    role: 'Co-Founder · Persuasion',
-    teaser: 'Former FBI Special Agent and decorated hostage negotiator.',
-    bio: 'Co-Founder of The Convincing Company and former FBI Special Agent, Chip spent years as a hostage negotiator mastering high-stakes communication, and was awarded the FBI Director’s Award for his exceptional service. Featured in Bloomberg Businessweek, Fast Company, Entrepreneur, and Investor Business Daily, one editor noted that “he can talk any executive off a ledge.” He now applies these elite negotiation and influence techniques to help clients achieve breakthrough results in business and beyond.',
-    tags: ['Bloomberg Businessweek', 'Fast Company', 'Entrepreneur'],
+    name: ‘Chip Massey’,
+    role: ‘Co-Founder · Persuasion’,
+    teaser: ‘Former FBI Special Agent and decorated hostage negotiator.’,
+    bio: ‘Co-Founder of The Convincing Company and former FBI Special Agent, Chip spent years as a hostage negotiator mastering high-stakes communication, and was awarded the FBI Director’s Award for his exceptional service. Featured in Bloomberg Businessweek, Fast Company, Entrepreneur, and Investor Business Daily, one editor noted that “he can talk any executive off a ledge.” He now applies these elite negotiation and influence techniques to help clients achieve breakthrough results in business and beyond.’,
+    tags: [‘Bloomberg Businessweek’, ‘Fast Company’, ‘Entrepreneur’, ‘Investor\’s Business Daily’, ‘CBS’],
   },
 ]
 
@@ -457,6 +457,11 @@ function Founders() {
                 <h3 className="mt-5 font-display text-lg font-extrabold uppercase leading-tight">{p.name}</h3>
                 <span className="kicker mt-2 block text-brand">{p.role}</span>
                 <p className="mt-3 text-sm leading-relaxed text-mist">{p.teaser}</p>
+                <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1.5">
+                  {p.tags.map((t) => (
+                    <span key={t} className="kicker text-white/40">{t}</span>
+                  ))}
+                </div>
                 <span className="label mt-auto inline-flex items-center gap-1.5 pt-5 text-[0.6rem] text-brand transition-all group-hover:gap-3">
                   Read bio <span aria-hidden>→</span>
                 </span>
