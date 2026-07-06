@@ -10,7 +10,6 @@ import {
 } from './components/ui.jsx'
 import adeleImg from './assets/adele.jpg'
 import chipImg from './assets/chip.jpg'
-const HERO_VIDEO_ID = '1105421157'
 
 /* ================================================================== */
 /*  SHARED                                                             */
@@ -108,20 +107,6 @@ function Hero() {
             The panels, the stages, the press are going to people no better than you —{' '}
             <span className="text-white">just more visible.</span> We put you in those rooms instead.
           </p>
-        </Reveal>
-
-        {/* Video — directly below the blurb */}
-        <Reveal delay={160}>
-          <div className="mx-auto mt-10 aspect-video w-full max-w-3xl overflow-hidden border border-white/15">
-            <iframe
-              src={`https://player.vimeo.com/video/${HERO_VIDEO_ID}?badge=0&autopause=0&player_id=0&app_id=58479`}
-              className="h-full w-full"
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              allowFullScreen
-              title="The Convincing Company"
-            />
-          </div>
         </Reveal>
 
         <Reveal delay={200}>
