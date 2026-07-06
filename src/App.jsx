@@ -112,9 +112,9 @@ function Hero() {
 
         {/* Video — directly below the blurb */}
         <Reveal delay={160}>
-          <div className="mx-auto mt-10 aspect-video w-full max-w-3xl overflow-hidden border border-white/15">
+          <div className="mx-auto mt-10 w-full max-w-3xl border border-white/15 bg-black">
             <video
-              className="h-full w-full object-cover"
+              className="w-full"
               controls
               preload="metadata"
               src={heroVideo}
