@@ -1,14 +1,12 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Reveal,
   LineReveal,
   Logo,
   Marker,
-  Plate,
-  Button,
-  Icon,
   StatusBadge,
   FitBar,
+  Icon,
 } from './components/ui.jsx'
 import adeleImg from './assets/adele.jpg'
 import chipImg from './assets/chip.jpg'
@@ -23,6 +21,17 @@ import chipOutfront from './assets/chip-outfront.jpg'
 const BOOK = 'mailto:adele@convincingcompany.com?subject=Strategy%20Call%20Request'
 const CASE_STUDIES_URL = 'https://convincingcompany.com/case-studies/'
 
+const STAGE_IMGS = [
+  'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
+  'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+  'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
+  'https://images.unsplash.com/photo-1559223607-a43c990c692c?w=800&q=80',
+  'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=80',
+  'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80',
+  'https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80',
+  'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80',
+]
+
 /* ================================================================== */
 /*  NAV                                                                */
 /* ================================================================== */
@@ -36,7 +45,11 @@ function Nav() {
   return (
     <header
       className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
-      style={{ background: scrolled ? 'rgba(9,9,9,0.95)' : 'transparent', backdropFilter: scrolled ? 'blur(12px)' : 'none', borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent' }}
+      style={{
+        background: scrolled ? 'rgba(9,9,9,0.95)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+      }}
     >
       <div className="mx-auto max-w-content px-6 sm:px-10">
         <nav className="flex items-center justify-between gap-3 py-5">
@@ -61,124 +74,127 @@ function Nav() {
 }
 
 /* ================================================================== */
-/*  HERO — clean dark, no background image                            */
+/*  HERO — full-height video panel                                     */
 /* ================================================================== */
 function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen items-center overflow-hidden px-6 pt-24 pb-20 sm:px-10">
-      {/* Subtle grid lines for architectural depth */}
+    <section id="top" className="relative overflow-hidden" style={{ display: 'flex', minHeight: '100vh' }}>
+
+      {/* LEFT — text column */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
-          backgroundSize: '120px 120px',
-        }}
-      />
-      {/* Radial vignette: bright center, dark edges */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 80% 70% at 38% 52%, transparent 15%, rgba(0,0,0,0.65) 100%)' }}
-      />
-      {/* Bottom fade into next section */}
-      <div className="absolute bottom-0 inset-x-0 h-32 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, #090909)' }} />
+        className="relative z-10 flex flex-col justify-center"
+        style={{ flex: 1, minWidth: 0, padding: 'clamp(6rem,9vh,8rem) clamp(2rem,6vw,6rem) clamp(3rem,5vh,5rem)' }}
+      >
+        {/* Subtle grid texture */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            opacity: 0.04,
+            backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
+            backgroundSize: '100px 100px',
+          }}
+        />
+        {/* Vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 90% 80% at 30% 50%, transparent 30%, rgba(0,0,0,0.55) 100%)' }}
+        />
 
-      <div className="relative z-10 mx-auto w-full max-w-content">
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5rem', width: '100%' }}>
+        <div className="relative z-10">
+          <Reveal>
+            <div className="flex items-center gap-4">
+              <span className="h-px w-10 bg-brand/70" />
+              <span className="label text-brand">For Founders &amp; Executives</span>
+            </div>
+          </Reveal>
 
-          {/* LEFT — text */}
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <Reveal>
-              <div className="flex items-center gap-4">
-                <span className="h-px w-10 bg-brand/70" />
-                <span className="label text-brand">For Founders &amp; Executives</span>
+          <LineReveal
+            className="display mt-8 text-[clamp(2rem,3.4vw,4rem)]"
+            lines={[
+              "You've earned",
+              "the credibility.",
+              "The market just",
+              <span key="red" className="text-brand">{"hasn't heard it."}</span>,
+            ]}
+          />
+
+          <Reveal delay={120}>
+            <p className="mt-8 text-lg leading-relaxed text-mist" style={{ maxWidth: '32rem' }}>
+              The panels, the stages, the press are going to people no better than you —{' '}
+              <span className="font-medium text-white">just more visible.</span>{' '}
+              We change that.
+            </p>
+          </Reveal>
+
+          <Reveal delay={200}>
+            <a
+              href={BOOK}
+              className="group mt-10 inline-flex items-center gap-3 bg-brand px-8 py-5 label text-[0.7rem] tracking-[0.22em] text-white transition-colors hover:bg-brandBright"
+            >
+              Book a strategy call
+              <Icon.arrow className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
+            </a>
+          </Reveal>
+
+          <Reveal delay={260}>
+            <div className="mt-12 flex gap-10 border-t border-white/8 pt-10">
+              <div>
+                <div className="font-display text-2xl font-extrabold text-white">197</div>
+                <div className="kicker mt-1 text-faint">Placements in one campaign</div>
               </div>
-            </Reveal>
-
-            <LineReveal
-              className="display mt-8 text-[clamp(2.6rem,5vw,5.2rem)]"
-              lines={[
-                "You've earned the",
-                "credibility. The market",
-                <span className="text-brand">{"just hasn't heard it."}</span>,
-              ]}
-            />
-
-            <Reveal delay={120}>
-              <p className="mt-8 text-lg leading-relaxed text-mist" style={{ maxWidth: '34rem' }}>
-                The panels, the stages, the press are going to people no better than you —{' '}
-                <span className="text-white font-medium">just more visible.</span>{' '}
-                We put you in those rooms instead.
-              </p>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <a
-                href={BOOK}
-                className="group mt-10 inline-flex items-center gap-3 bg-brand px-8 py-5 label text-[0.7rem] tracking-[0.22em] text-white transition-colors hover:bg-brandBright"
-              >
-                Book a strategy call
-                <Icon.arrow className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
-              </a>
-            </Reveal>
-
-            <Reveal delay={260}>
-              <div className="mt-12 flex gap-10 border-t border-white/8 pt-10">
-                <div>
-                  <div className="font-display text-2xl font-extrabold text-white">197</div>
-                  <div className="kicker mt-1 text-faint">Placements in one campaign</div>
-                </div>
-                <div>
-                  <div className="font-display text-2xl font-extrabold text-white">$100M+</div>
-                  <div className="kicker mt-1 text-faint">Exit driven by visibility</div>
-                </div>
-                <div>
-                  <div className="font-display text-2xl font-extrabold text-white">50 yrs</div>
-                  <div className="kicker mt-1 text-faint">Combined experience</div>
-                </div>
+              <div>
+                <div className="font-display text-2xl font-extrabold text-white">$100M+</div>
+                <div className="kicker mt-1 text-faint">Exit driven by visibility</div>
               </div>
-            </Reveal>
-          </div>
-
-          {/* RIGHT — portrait video */}
-          <div style={{ width: '310px', flexShrink: 0 }}>
-            <Reveal delay={60}>
-              <div
-                style={{
-                  aspectRatio: '9/16',
-                  overflow: 'hidden',
-                  background: '#111',
-                  boxShadow: '0 0 0 1px rgba(240,68,56,0.25), 0 40px 100px rgba(0,0,0,0.9)',
-                }}
-              >
-                <video
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  controls
-                  preload="metadata"
-                  src={heroVideo}
-                />
+              <div>
+                <div className="font-display text-2xl font-extrabold text-white">50 yrs</div>
+                <div className="kicker mt-1 text-faint">Combined experience</div>
               </div>
-            </Reveal>
-          </div>
-
+            </div>
+          </Reveal>
         </div>
       </div>
+
+      {/* RIGHT — full-height video, no container border */}
+      <div
+        className="relative overflow-hidden"
+        style={{ width: 'clamp(280px, 42%, 680px)', flexShrink: 0 }}
+      >
+        <video
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%', display: 'block' }}
+          controls
+          preload="metadata"
+          src={heroVideo}
+        />
+        {/* Blend edge into left panel */}
+        <div
+          className="absolute inset-y-0 left-0 pointer-events-none"
+          style={{ width: '100px', background: 'linear-gradient(to right, #090909, transparent)' }}
+        />
+        {/* Bottom fade */}
+        <div
+          className="absolute inset-x-0 bottom-0 pointer-events-none"
+          style={{ height: '140px', background: 'linear-gradient(to top, #090909, transparent)' }}
+        />
+      </div>
+
     </section>
   )
 }
 
 /* ================================================================== */
-/*  FEATURED IN                                                        */
+/*  FEATURED IN — brand-colored logos                                 */
 /* ================================================================== */
 const FEATURED_OUTLETS = [
-  { name: 'The Wall Street Journal', cls: 'font-serif text-2xl font-bold tracking-tight' },
-  { name: 'Bloomberg', cls: 'font-display text-xl font-extrabold uppercase tracking-tight' },
-  { name: 'CNN', cls: 'font-display text-3xl font-black tracking-tight' },
-  { name: 'NBC', cls: 'font-display text-3xl font-black tracking-widest' },
-  { name: 'CBS', cls: 'font-display text-3xl font-black tracking-tight' },
-  { name: 'Fox News', cls: 'font-display text-xl font-extrabold uppercase tracking-tight' },
-  { name: 'Entrepreneur', cls: 'font-display text-base font-extrabold uppercase tracking-tight' },
-  { name: 'Fast Company', cls: 'font-display text-base font-extrabold uppercase tracking-[0.12em]' },
-  { name: 'Inc.', cls: 'font-display text-2xl font-black tracking-tight' },
+  { name: 'The Wall Street Journal', cls: 'font-serif text-2xl font-bold tracking-tight', color: '#D4AF6F' },
+  { name: 'Bloomberg', cls: 'font-display text-xl font-extrabold uppercase tracking-tight', color: '#A78BFA' },
+  { name: 'CNN', cls: 'font-display text-3xl font-black tracking-tight', color: '#E84545' },
+  { name: 'NBC', cls: 'font-display text-3xl font-black tracking-widest', color: '#5EB8FF' },
+  { name: 'CBS', cls: 'font-display text-3xl font-black tracking-tight', color: '#6B9CF4' },
+  { name: 'Fox News', cls: 'font-display text-xl font-extrabold uppercase tracking-tight', color: '#FF8C42' },
+  { name: 'Entrepreneur', cls: 'font-display text-base font-extrabold uppercase tracking-tight', color: '#34D399' },
+  { name: 'Fast Company', cls: 'font-display text-base font-extrabold uppercase tracking-[0.12em]', color: '#FB923C' },
+  { name: 'Inc.', cls: 'font-display text-2xl font-black tracking-tight', color: '#F87171' },
 ]
 
 function FeaturedIn() {
@@ -187,13 +203,20 @@ function FeaturedIn() {
       <div className="mx-auto max-w-content px-6 sm:px-10">
         <p className="kicker mb-10 text-center text-faint">The Convincing Company has been featured in</p>
       </div>
-      <div className="relative overflow-hidden" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
+      <div
+        className="relative overflow-hidden"
+        style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
+      >
         <div
           className="flex w-max items-center gap-20"
           style={{ animation: 'marquee 32s linear infinite' }}
         >
           {[...FEATURED_OUTLETS, ...FEATURED_OUTLETS, ...FEATURED_OUTLETS].map((o, i) => (
-            <span key={i} className={`${o.cls} whitespace-nowrap text-white/40 transition-colors hover:text-white/80`}>
+            <span
+              key={i}
+              className={`${o.cls} whitespace-nowrap transition-opacity hover:opacity-100`}
+              style={{ color: o.color, opacity: 0.75 }}
+            >
               {o.name}
             </span>
           ))}
@@ -204,7 +227,7 @@ function FeaturedIn() {
 }
 
 /* ================================================================== */
-/*  THE ROOMS — editorial conference cards, no stock photos           */
+/*  THE ROOMS — conference tiles with stage images                    */
 /* ================================================================== */
 const CONFERENCES = [
   { name: 'Aspen Ideas Festival', when: 'Jun 2026', size: '3,400 attendees', score: 9, status: 'accepted' },
@@ -243,22 +266,32 @@ function Pipeline() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-px bg-white/8 border border-white/8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CONFERENCES.map((c, i) => (
-            <Reveal key={c.name} delay={(i % 4) * 50}>
-              <article className="group bg-coal p-7 transition-colors hover:bg-panel h-full flex flex-col gap-5">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-display text-sm font-extrabold uppercase leading-snug text-white flex-1">
-                    {c.name}
-                  </h3>
+            <Reveal key={c.name} delay={(i % 4) * 55}>
+              <article className="group relative overflow-hidden border border-white/8">
+                <img
+                  src={STAGE_IMGS[i % STAGE_IMGS.length]}
+                  alt={c.name}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* dark overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-black/10 transition-opacity duration-500 group-hover:from-black/95" />
+                {/* status badge */}
+                <div className="absolute top-3 right-3">
                   <StatusBadge status={c.status} />
                 </div>
-                <p className="kicker text-faint">{c.when} · {c.size}</p>
-                {c.score && (
-                  <div className="mt-auto">
-                    <FitBar score={c.score} />
-                  </div>
-                )}
+                {/* text */}
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <h3 className="font-display text-sm font-extrabold uppercase leading-snug text-white">{c.name}</h3>
+                  <p className="kicker mt-1.5 text-white/55">{c.when} · {c.size}</p>
+                  {c.score && (
+                    <div className="mt-3">
+                      <FitBar score={c.score} />
+                    </div>
+                  )}
+                </div>
               </article>
             </Reveal>
           ))}
@@ -409,7 +442,7 @@ function CaseStudies() {
           className="display mt-8 text-[clamp(2rem,4vw,3.8rem)]"
           lines={[
             "Real rooms.",
-            <span className="text-brand">Real outcomes.</span>,
+            <span key="red" className="text-brand">Real outcomes.</span>,
           ]}
         />
 
@@ -456,7 +489,7 @@ function CaseStudies() {
 }
 
 /* ================================================================== */
-/*  FOUNDERS — full-width alternating layout                          */
+/*  FOUNDERS — full-width alternating, portrait photos               */
 /* ================================================================== */
 const FOUNDERS = [
   {
@@ -475,11 +508,11 @@ const FOUNDERS = [
   },
 ]
 
-const EVENTS = [
-  ['Anderson Cooper 360', 'CNN', chipAndersonCooper],
-  ['NBC', 'National coverage', chipNBC],
-  ['Outfront', 'Media appearance', chipOutfront],
-  ['Keynote', 'Main stage', 'https://images.unsplash.com/photo-1559223607-a43c990c692c?w=700&q=75'],
+/* Only real press photos — no stock */
+const CHIP_PRESS = [
+  { label: 'Anderson Cooper 360', caption: 'CNN', src: chipAndersonCooper },
+  { label: 'NBC', caption: 'National broadcast', src: chipNBC },
+  { label: 'CNN OutFront', caption: 'Erin Burnett', src: chipOutfront },
 ]
 
 function Founders() {
@@ -498,25 +531,31 @@ function Founders() {
         />
 
         {/* Full-width alternating founder rows */}
-        <div className="mt-20 flex flex-col">
+        <div className="mt-20 flex flex-col gap-px border border-white/8">
           {FOUNDERS.map((p, i) => {
             const reversed = i % 2 === 1
             return (
               <Reveal key={p.name} delay={i * 60}>
-                <div
-                  className="grid grid-cols-1 items-center gap-0 border border-white/8 lg:grid-cols-2"
-                  style={{ marginTop: i > 0 ? '-1px' : 0 }}
-                >
-                  {/* Photo */}
-                  <div className={`overflow-hidden ${reversed ? 'lg:order-2' : 'lg:order-1'}`}>
+                <div className={`grid grid-cols-1 lg:grid-cols-2`}>
+                  {/* Photo — fills height of the bio column */}
+                  <div
+                    className={`relative overflow-hidden ${reversed ? 'lg:order-2' : 'lg:order-1'}`}
+                    style={{ minHeight: '400px' }}
+                  >
                     <img
                       src={p.img}
                       alt={p.name}
-                      className="aspect-[3/2] w-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                      className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
+                    />
+                    {/* subtle gradient at bottom of photo */}
+                    <div
+                      className="absolute inset-x-0 bottom-0 pointer-events-none"
+                      style={{ height: '120px', background: 'linear-gradient(to top, rgba(9,9,9,0.6), transparent)' }}
                     />
                   </div>
+
                   {/* Bio */}
-                  <div className={`p-10 sm:p-14 bg-coal ${reversed ? 'lg:order-1' : 'lg:order-2'}`}>
+                  <div className={`flex flex-col justify-center bg-coal p-10 sm:p-14 ${reversed ? 'lg:order-1' : 'lg:order-2'}`}>
                     <span className="label text-brand">{p.role}</span>
                     <h3 className="mt-4 font-display text-[clamp(1.6rem,2.8vw,2.6rem)] font-extrabold uppercase leading-none text-white">
                       {p.name}
@@ -536,7 +575,7 @@ function Founders() {
 
         {/* Stats bar */}
         <Reveal delay={100}>
-          <div className="mt-16 grid grid-cols-1 gap-px border border-white/8 bg-white/8 sm:grid-cols-3">
+          <div className="mt-px grid grid-cols-1 gap-px border-x border-b border-white/8 bg-white/8 sm:grid-cols-3">
             <div className="bg-coal px-10 py-9">
               <div className="font-display text-4xl font-extrabold text-white">197</div>
               <p className="mt-2 text-sm leading-relaxed text-mist">Media placements secured in a single campaign</p>
@@ -548,7 +587,7 @@ function Founders() {
             <div className="bg-coal px-10 py-9">
               <div className="font-display text-sm font-extrabold uppercase tracking-wide text-white">Convince Me</div>
               <p className="mt-2 text-sm leading-relaxed text-mist">
-                High-Stakes Negotiation Tactics to Get Results in Any Business Situation — Chip Massey
+                High-Stakes Negotiation Tactics — Chip Massey's WSJ-featured book
               </p>
             </div>
           </div>
@@ -557,22 +596,25 @@ function Founders() {
         {/* Chip press photos */}
         <div className="mt-20">
           <Reveal>
-            <span className="label text-brand">Chip in the room</span>
+            <Marker>Chip in the Room</Marker>
           </Reveal>
-          <div className="mt-6 grid grid-cols-2 gap-px border border-white/8 bg-white/8 sm:grid-cols-4">
-            {EVENTS.map(([label, caption, src], i) => (
-              <Reveal key={label} delay={i * 60}>
-                <div className="relative overflow-hidden aspect-[4/5] group">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {CHIP_PRESS.map(({ label, caption, src }, i) => (
+              <Reveal key={label} delay={i * 70}>
+                <div className="group relative overflow-hidden border border-white/8 aspect-[4/3]">
                   <img
                     src={src}
                     alt={label}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)' }} />
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <div className="font-display text-xs font-extrabold uppercase text-white">{label}</div>
-                    <div className="kicker mt-1 text-white/50">{caption}</div>
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)' }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <div className="font-display text-sm font-extrabold uppercase text-white">{label}</div>
+                    <div className="kicker mt-1 text-white/55">{caption}</div>
                   </div>
                 </div>
               </Reveal>
@@ -585,29 +627,29 @@ function Founders() {
 }
 
 /* ================================================================== */
-/*  SOCIAL PROOF — Chip testimonial videos                            */
+/*  CHIP IN ACTION — testimonial videos (correctly labeled)           */
 /* ================================================================== */
-const CHIP_PROOFS = [
+const CHIP_VIDEOS = [
   { vimeoId: '1203891346' },
   { vimeoId: '1203801461' },
 ]
 
-function SocialProof() {
+function ChipInAction() {
   return (
-    <section id="social-proof" className="border-b border-white/8 bg-coal px-6 py-28 sm:px-10 sm:py-36">
+    <section id="chip-action" className="border-b border-white/8 bg-coal px-6 py-28 sm:px-10 sm:py-36">
       <div className="mx-auto max-w-content">
         <Reveal>
-          <Marker>What Clients Say</Marker>
+          <Marker>Chip in the Room</Marker>
         </Reveal>
         <LineReveal
           className="display mt-8 text-[clamp(2rem,4vw,3.8rem)]"
           lines={[
-            "Hear it from the",
-            "people in the room.",
+            "Watch him make",
+            "the case.",
           ]}
         />
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {CHIP_PROOFS.map((p, i) => (
+          {CHIP_VIDEOS.map((p, i) => (
             <Reveal key={p.vimeoId} delay={i * 80}>
               <div className="overflow-hidden border border-white/8 bg-ink">
                 <div className="aspect-video w-full">
@@ -617,7 +659,7 @@ function SocialProof() {
                     frameBorder="0"
                     allow="autoplay; fullscreen; picture-in-picture"
                     allowFullScreen
-                    title={`Client testimonial ${i + 1}`}
+                    title={`Chip Massey — ${i + 1}`}
                   />
                 </div>
               </div>
@@ -683,7 +725,7 @@ function CTA() {
           lines={[
             "The panels are",
             "going to someone.",
-            <span className="text-brand">Make it you.</span>,
+            <span key="red" className="text-brand">Make it you.</span>,
           ]}
         />
         <Reveal delay={120}>
@@ -746,7 +788,7 @@ export default function App() {
         <Trajectory />
         <CaseStudies />
         <Founders />
-        <SocialProof />
+        <ChipInAction />
         <FAQ />
         <CTA />
       </main>
