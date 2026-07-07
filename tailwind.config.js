@@ -4,13 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#000000',
-        coal: '#0a0a0b',
-        panel: '#0e0e10',
+        ink: '#090909',
+        coal: '#111111',
+        panel: '#181818',
+        surface: '#1F1F1F',
         brand: '#f04438',
         brandBright: '#ff5a4d',
-        mist: '#9a9aa2',
-        faint: '#5a5a63',
+        mist: '#A8A8A8',
+        faint: '#606060',
         accept: '#4ade80',
         submit: '#5b9dff',
       },

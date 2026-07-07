@@ -7,6 +7,11 @@
   to   { transform: translateX(-50%); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 :root {
   color-scheme: dark;
 }
@@ -50,14 +55,14 @@ body {
 /* ---- Reveal on scroll ---------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(42px) scale(0.965);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.22, 1.2, 0.36, 1);
+  transform: translateY(36px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 /* line-clip reveal for big headlines */
@@ -67,8 +72,8 @@ body {
 }
 .line-reveal > span > span {
   display: block;
-  transform: translateY(105%);
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(110%);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .line-reveal.is-visible > span > span {
   transform: translateY(0);

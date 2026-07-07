@@ -101,7 +101,7 @@ export function Plate({ label, caption, ratio = 'aspect-[4/3]', icon = 'user', s
             src={src}
             alt={label || ''}
             loading="lazy"
-            className={`h-full w-full object-cover ${pos} grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.04]`}
+            className={`h-full w-full object-cover ${pos} transition-all duration-700 ease-out group-hover:scale-[1.04]`}
           />
         ) : (
           <div className="grid h-full w-full place-items-center bg-white/[0.05]">
